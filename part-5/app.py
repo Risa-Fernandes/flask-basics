@@ -1,16 +1,7 @@
 """
 Part 5: Mini Project - Personal Website with Flask
 ===================================================
-Putting it all together! A complete personal website using everything learned.
-
-Features Used:
-- Flask app setup
-- Multiple routes
-- Template rendering
-- Jinja2 variables, loops, and conditionals
-- Template inheritance (base template)
-- Static files (CSS)
-- Dynamic routing
+A complete personal website using everything learned in Parts 1-4.
 
 How to Run:
 1. Make sure venv is activated
@@ -26,7 +17,6 @@ app = Flask(__name__)
 # YOUR DATA - Customize this section with your own information!
 # =============================================================================
 
-# Personal information (modify these!)
 PERSONAL_INFO = {
     'name': 'Your Name',
     'title': 'Web Developer',
@@ -36,7 +26,6 @@ PERSONAL_INFO = {
     'linkedin': 'https://linkedin.com/in/yourusername',
 }
 
-# Your skills (modify these!)
 SKILLS = [
     {'name': 'Python', 'level': 80},
     {'name': 'HTML/CSS', 'level': 75},
@@ -45,29 +34,10 @@ SKILLS = [
     {'name': 'SQL', 'level': 45},
 ]
 
-# Your projects (modify these!)
 PROJECTS = [
-    {
-        'id': 1,
-        'name': 'Personal Website',
-        'description': 'A Flask-powered personal portfolio website.',
-        'tech': ['Python', 'Flask', 'HTML', 'CSS'],
-        'status': 'Completed',
-    },
-    {
-        'id': 2,
-        'name': 'Todo App',
-        'description': 'A simple task management application.',
-        'tech': ['Python', 'Flask', 'SQLite'],
-        'status': 'In Progress',
-    },
-    {
-        'id': 3,
-        'name': 'Weather Dashboard',
-        'description': 'Display weather data from an API.',
-        'tech': ['Python', 'Flask', 'API'],
-        'status': 'Planned',
-    },
+    {'id': 1, 'name': 'Personal Website', 'description': 'A Flask-powered personal portfolio website.', 'tech': ['Python', 'Flask', 'HTML', 'CSS'], 'status': 'Completed'},
+    {'id': 2, 'name': 'Todo App', 'description': 'A simple task management application.', 'tech': ['Python', 'Flask', 'SQLite'], 'status': 'In Progress'},
+    {'id': 3, 'name': 'Weather Dashboard', 'description': 'Display weather data from an API.', 'tech': ['Python', 'Flask', 'API'], 'status': 'Planned'},
 ]
 
 
@@ -77,41 +47,31 @@ PROJECTS = [
 
 @app.route('/')
 def home():
-    """Home page - Introduction"""
     return render_template('index.html', info=PERSONAL_INFO)
 
 
 @app.route('/about')
 def about():
-    """About page - More details and skills"""
     return render_template('about.html', info=PERSONAL_INFO, skills=SKILLS)
 
 
 @app.route('/projects')
 def projects():
-    """Projects page - List all projects"""
     return render_template('projects.html', info=PERSONAL_INFO, projects=PROJECTS)
 
 
-@app.route('/project/<int:project_id>')
+@app.route('/project/<int:project_id>')  # Dynamic route for individual project
 def project_detail(project_id):
-    """Individual project page - Dynamic route"""
-    # Find the project by ID
     project = None
     for p in PROJECTS:
         if p['id'] == project_id:
             project = p
             break
-
-    return render_template('project_detail.html',
-                           info=PERSONAL_INFO,
-                           project=project,
-                           project_id=project_id)
+    return render_template('project_detail.html', info=PERSONAL_INFO, project=project, project_id=project_id)
 
 
 @app.route('/contact')
 def contact():
-    """Contact page"""
     return render_template('contact.html', info=PERSONAL_INFO)
 
 
@@ -138,7 +98,7 @@ if __name__ == '__main__':
 # =============================================================================
 
 # =============================================================================
-# FINAL EXERCISES:
+# EXERCISES:
 # =============================================================================
 #
 # Exercise 5.1: Personalize your website

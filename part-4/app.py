@@ -1,14 +1,6 @@
 """
 Part 4: Dynamic Routes - URL Parameters
 ========================================
-Learn how to capture values from URLs and use them in your app!
-
-Learning Goals:
-- Create dynamic routes with <variable> syntax
-- Use type converters (string, int, float)
-- Build flexible URLs that respond to user input
-- Understand URL building with url_for()
-
 How to Run:
 1. Make sure venv is activated
 2. Run: python app.py
@@ -22,79 +14,37 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    """Home page with links to demonstrate dynamic routes"""
     return render_template('index.html')
 
 
-# =============================================================================
-# DYNAMIC ROUTE WITH STRING PARAMETER
-# =============================================================================
-@app.route('/user/<username>')
+@app.route('/user/<username>')  # <username> captures any text from URL, visit: /user/Alice, /user/Bob
 def user_profile(username):
-    """
-    <username> captures any text from the URL
-    Visit: /user/Alice, /user/Bob, /user/YourName
-    """
     return render_template('user.html', username=username)
 
 
-# =============================================================================
-# DYNAMIC ROUTE WITH INTEGER PARAMETER
-# =============================================================================
-@app.route('/post/<int:post_id>')
+@app.route('/post/<int:post_id>')  # <int:post_id> captures only integers, /post/abc returns 404
 def show_post(post_id):
-    """
-    <int:post_id> captures only integers from the URL
-    Visit: /post/1, /post/42, /post/100
-    /post/abc will return 404 (not found)
-    """
-    # Simulated post data (in real apps, this comes from a database)
-    posts = {
+    posts = {  # Simulated post data (in real apps, this comes from a database)
         1: {'title': 'Getting Started with Flask', 'content': 'Flask is a micro-framework...'},
         2: {'title': 'Understanding Routes', 'content': 'Routes map URLs to functions...'},
         3: {'title': 'Working with Templates', 'content': 'Jinja2 makes HTML dynamic...'},
     }
-
-    # Get the post or None if not found
-    post = posts.get(post_id)
-
+    post = posts.get(post_id)  # Get the post or None if not found
     return render_template('post.html', post_id=post_id, post=post)
 
 
-# =============================================================================
-# MULTIPLE PARAMETERS IN ONE ROUTE
-# =============================================================================
-@app.route('/user/<username>/post/<int:post_id>')
+@app.route('/user/<username>/post/<int:post_id>')  # Multiple dynamic segments, visit: /user/Alice/post/1
 def user_post(username, post_id):
-    """
-    Multiple dynamic segments in one URL
-    Visit: /user/Alice/post/1
-    """
     return render_template('user_post.html', username=username, post_id=post_id)
 
 
-# =============================================================================
-# ROUTE WITH OPTIONAL TRAILING SLASH
-# =============================================================================
-@app.route('/about/')
+@app.route('/about/')  # Trailing slash means both /about and /about/ work
 def about():
-    """
-    The trailing slash means both /about and /about/ work
-    Without trailing slash, only /about works
-    """
     return render_template('about.html')
 
 
-# =============================================================================
-# DEMONSTRATING url_for()
-# =============================================================================
-@app.route('/links')
+@app.route('/links')  # Demonstrates url_for() - generates URLs dynamically (better than hardcoding!)
 def show_links():
-    """
-    url_for() generates URLs for your routes dynamically
-    This is better than hardcoding URLs!
-    """
-    # Generate URLs using url_for
     links = {
         'home': url_for('home'),
         'about': url_for('about'),

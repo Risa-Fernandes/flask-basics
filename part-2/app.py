@@ -1,40 +1,25 @@
 """
 Part 2: Templates - Rendering HTML Files
 =========================================
-Instead of returning HTML strings, we'll use separate HTML files!
-
-Learning Goals:
-- Understand why we use templates (separation of concerns)
-- Learn about the templates/ folder convention
-- Use render_template() to serve HTML files
-
 How to Run:
 1. Make sure venv is activated
 2. Run: python app.py
 3. Open browser: http://localhost:5000
 """
 
-# Import render_template along with Flask
-from flask import Flask, render_template
+from flask import Flask, render_template  # render_template lets us serve HTML files
 
 app = Flask(__name__)
 
 
 @app.route('/')
 def home():
-    """
-    Instead of returning a string, we return render_template()
-    Flask automatically looks in the 'templates/' folder for the HTML file
-    """
-    return render_template('index.html')
+    return render_template('index.html')  # Flask looks in 'templates/' folder for this file
 
 
 @app.route('/about')
 def about():
-    """
-    Another route that renders a different template
-    """
-    return render_template('about.html')
+    return render_template('about.html')  # Renders templates/about.html
 
 
 if __name__ == '__main__':

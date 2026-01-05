@@ -1,14 +1,6 @@
 """
 Part 3: Jinja2 Variables - Passing Data from Python to HTML
 ============================================================
-Now we'll make our templates DYNAMIC by passing variables!
-
-Learning Goals:
-- Pass variables from Python to HTML templates
-- Use {{ variable }} syntax in Jinja2
-- Pass multiple variables including lists and dictionaries
-- Use Jinja2 loops and conditionals
-
 How to Run:
 1. Make sure venv is activated
 2. Run: python app.py
@@ -22,32 +14,19 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    """
-    Passing a single variable to the template
-    The syntax is: render_template('file.html', variable_name=value)
-    """
-    # This variable will be available in the template as {{ name }}
     student_name = "Alex"
-
-    return render_template('index.html', name=student_name)
+    return render_template('index.html', name=student_name)  # Pass variable to template as {{ name }}
 
 
 @app.route('/profile')
 def profile():
-    """
-    Passing multiple variables to the template
-    You can pass as many as you need!
-    """
-    # All these will be available in the template
     user_data = {
         'name': 'Sarah',
         'age': 22,
         'course': 'Web Development',
         'is_enrolled': True
     }
-
-    # You can pass individual values or unpack a dictionary
-    return render_template('profile.html',
+    return render_template('profile.html',  # Pass multiple variables to template
                            name=user_data['name'],
                            age=user_data['age'],
                            course=user_data['course'],
@@ -56,27 +35,17 @@ def profile():
 
 @app.route('/skills')
 def skills():
-    """
-    Passing a list to the template
-    We can loop through it in Jinja2!
-    """
     programming_skills = ['Python', 'HTML', 'CSS', 'JavaScript', 'Flask']
-
-    return render_template('skills.html', skills=programming_skills)
+    return render_template('skills.html', skills=programming_skills)  # Pass list to loop through in template
 
 
 @app.route('/projects')
 def projects():
-    """
-    Passing a list of dictionaries (common pattern!)
-    This is how you'd display data from a database
-    """
-    project_list = [
+    project_list = [  # List of dictionaries - common pattern for database-like data
         {'name': 'Personal Website', 'status': 'Completed', 'tech': 'HTML/CSS'},
         {'name': 'Flask Blog', 'status': 'In Progress', 'tech': 'Python/Flask'},
         {'name': 'Weather App', 'status': 'Planned', 'tech': 'JavaScript'},
     ]
-
     return render_template('projects.html', projects=project_list)
 
 
