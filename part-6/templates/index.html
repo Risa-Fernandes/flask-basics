@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Home | To-Do App{% endblock %}
+
+{% block content %}
+<h2>My Tasks</h2>
+
+{% for task in tasks %}
+<div class="task">
+    <h3>{{ task.title | upper }}</h3>
+
+    {% if task.status == 'Completed' %}
+        <p class="status.completed">Status: {{ task.status }}</p>
+    {% else %}
+        <p class="status.pending">Status: {{ task.status }}</p>
+    {% endif %}
+
+    <p>Due Date: {{ task.due_date }}</p>
+
+    <p>Priority: {{ task.priority }}</p>
+
+    <div style="margin-top: 10px;">
+        <a href="{{ url_for('task_detail', id=task.id) }}" class="btn view">View</a>
+        <a href="/edit/{{ task.id }}" class="btn edit">Edit</a>
+        <a href="/delete/{{ task.id }}" class="btn delete"
+           onclick="return confirm('Delete this task?')">Delete</a>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

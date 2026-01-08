@@ -18,27 +18,55 @@ app = Flask(__name__)
 # =============================================================================
 
 PERSONAL_INFO = {
-    'name': 'Your Name',
-    'title': 'Web Developer',
+    'name': 'Risa',
+    'title': 'Full Stack Developer Intern',
     'bio': 'A passionate developer learning Flask and web development.',
-    'email': 'your.email@example.com',
-    'github': 'https://github.com/yourusername',
-    'linkedin': 'https://linkedin.com/in/yourusername',
+    'email': 'risarajivfernandes@gmail.com',
+    'github': 'https://github.com/Risa-Fernandes',
+    'linkedin': 'https://linkedin.com/in/RisaFernandes',
 }
 
 SKILLS = [
-    {'name': 'Python', 'level': 80},
-    {'name': 'HTML/CSS', 'level': 75},
+    {'name': 'Python', 'level': 85},
+    {'name': 'HTML/CSS', 'level': 80},
     {'name': 'Flask', 'level': 60},
     {'name': 'JavaScript', 'level': 50},
-    {'name': 'SQL', 'level': 45},
+    {'name': 'Microsoft Excel', 'level': 85},
+    {'name': 'SQLite', 'level': 75},
+    {'name': 'PHP', 'level': 75},
+    {'name': 'Django', 'level': 75},
 ]
 
 PROJECTS = [
     {'id': 1, 'name': 'Personal Website', 'description': 'A Flask-powered personal portfolio website.', 'tech': ['Python', 'Flask', 'HTML', 'CSS'], 'status': 'Completed'},
-    {'id': 2, 'name': 'Todo App', 'description': 'A simple task management application.', 'tech': ['Python', 'Flask', 'SQLite'], 'status': 'In Progress'},
-    {'id': 3, 'name': 'Weather Dashboard', 'description': 'Display weather data from an API.', 'tech': ['Python', 'Flask', 'API'], 'status': 'Planned'},
+    {'id': 2, 'name': 'Pick your Medico Website', 'description': 'Website to manage a particular medical store', 'tech': ['Python', 'Django', 'SQLite'], 'status': 'Completed'},
+    {'id': 3, 'name': 'Weather Dashboard', 'description': 'Dashboard that display weather data from an API.', 'tech': ['Python', 'Flask', 'API'], 'status': 'Planned'},
+    {'id': 4, 'name': 'Diabetes Prediction ML Model', 'description': 'With the help of details of a person, it predicts whether the person is diabetic or not', 'tech': ['Python', 'API'], 'status': 'Completed'},
+    {'id': 5, 'name': 'Event Calendar Telegram Bot', 'description': 'Bot that helps the user to insert their personal events and manipulating any of the events. (insert, edit, view, delete)', 'tech': ['Python', 'Flask', 'API'], 'status': 'Completed'},
 ]
+
+
+BLOG_POSTS = [
+    {
+        "id": 1,
+        "title": "Getting Started with Flask",
+        "content": "Flask is a lightweight Python web framework that makes web development simple and fun.",
+        "date": "Jan 5, 2026"
+    },
+    {
+        "id": 2,
+        "title": "Why I Love Python",
+        "content": "Python is easy to read, powerful, and has a huge ecosystem of libraries.",
+        "date": "Jan 10, 2026"
+    },
+    {
+        "id": 3,
+        "title": "My Journey into Web Development",
+        "content": "I started learning web development using HTML, CSS, and Flask.",
+        "date": "Jan 15, 2026"
+    }
+]
+
 
 
 # =============================================================================
@@ -60,6 +88,16 @@ def projects():
     return render_template('projects.html', info=PERSONAL_INFO, projects=PROJECTS)
 
 
+@app.route('/blog')
+def blog():
+    return render_template(
+        'blog.html',
+        info=PERSONAL_INFO,
+        posts=BLOG_POSTS
+    )
+
+
+
 @app.route('/project/<int:project_id>')  # Dynamic route for individual project
 def project_detail(project_id):
     project = None
@@ -68,6 +106,25 @@ def project_detail(project_id):
             project = p
             break
     return render_template('project_detail.html', info=PERSONAL_INFO, project=project, project_id=project_id)
+
+
+@app.route('/skill/<skill_name>')
+def skill_projects(skill_name):
+    matching_projects = []
+
+    for project in PROJECTS:
+        if skill_name in project['tech']:
+            matching_projects.append(project)
+
+    return render_template(
+        'skill.html',
+        info=PERSONAL_INFO,
+        skill_name=skill_name,
+        projects=matching_projects
+    )
+
+
+
 
 
 @app.route('/contact')

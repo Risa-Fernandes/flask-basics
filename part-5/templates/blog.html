@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Blog | {{ info.name }}{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>My Blog</h2>
+    <p>Thoughts, tutorials, and experiences from my learning journey.</p>
+</div>
+
+{% for post in posts %}
+<div class="card">
+    <h3>{{ post.title }}</h3>
+    <p style="color: gray; font-size: 14px;">{{ post.date }}</p>
+    <p>{{ post.content }}</p>
+
+    <div class="info-box" style="margin-top: 15px;">
+        <strong>Jinja2 Loop:</strong>
+        <p>This post is rendered using a <code>for</code> loop.</p>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

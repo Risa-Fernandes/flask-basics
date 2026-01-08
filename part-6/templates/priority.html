@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}{{ priority }} Priority Tasks{% endblock %}
+
+{% block content %}
+<h2>{{ priority }} Priority Tasks</h2>
+
+{% if tasks %}
+    {% for task in tasks %}
+    <div class="card">
+        <h3>{{ task.title }}</h3>
+        <p>Status: {{ task.status }}</p>
+        <p>Due Date: {{ task.due_date }}</p>
+        <a href="{{ url_for('task_detail', id=task.id) }}">View Task</a>
+    </div>
+    {% endfor %}
+{% else %}
+    <p>No tasks found.</p>
+{% endif %}
+{% endblock %}

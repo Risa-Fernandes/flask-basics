@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h2>Task Dashboard</h2>
+
+<div class="card">
+    <p><strong>Total Tasks:</strong> {{ total }}</p>
+    <p><strong>Completed:</strong> {{ completed }}</p>
+    <p><strong>In Progress:</strong> {{ in_progress }}</p>
+    <p><strong>Pending:</strong> {{ pending }}</p>
+</div>
+
+<div class="card">
+    <h3>Quick Filters</h3>
+    <a href="{{ url_for('tasks_by_priority', name='High') }}">High Priority</a><br>
+    <a href="{{ url_for('tasks_by_priority', name='Medium') }}">Medium Priority</a><br>
+    <a href="{{ url_for('tasks_by_priority', name='Low') }}">Low Priority</a>
+</div>
+{% endblock %}

@@ -7,7 +7,7 @@ How to Run:
 3. Try different URLs like /user/YourName or /post/123
 """
 
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
@@ -33,9 +33,63 @@ def show_post(post_id):
     return render_template('post.html', post_id=post_id, post=post)
 
 
+@app.route('/product/<int:product_id>')
+def show_product(product_id):
+    products = {
+        1: {'id': 1, 'name': 'Table', 'price': 10000},
+        2: {'id': 2, 'name': 'Chair', 'price': 20000},
+        3: {'id': 3, 'name': 'Sofa', 'price': 30000},
+    }
+
+    product = products.get(product_id)  # Fetch single product
+
+    return render_template(
+        'product.html',
+        product_id=product_id,
+        product=product
+    )
+
+
 @app.route('/user/<username>/post/<int:post_id>')  # Multiple dynamic segments, visit: /user/Alice/post/1
 def user_post(username, post_id):
     return render_template('user_post.html', username=username, post_id=post_id)
+
+
+@app.route('/user/<username>/product/<int:product_id>')  # Multiple dynamic segments, visit: /user/Alice/post/1
+def user_product(username, product_id):
+    return render_template('user_product.html', username=username, product_id=product_id)
+
+
+@app.route('/category/<category_name>/product/<int:product_id>')
+def category_product(category_name, product_id):
+    products = {
+        1: {'id': 1, 'name': 'Table', 'price': 10000},
+        2: {'id': 2, 'name': 'Chair', 'price': 20000},
+        3: {'id': 3, 'name': 'Sofa', 'price': 30000},
+    }
+
+    product = products.get(product_id)
+
+    return render_template(
+        'category_product.html',
+        category_name=category_name,
+        product_id=product_id,
+        product=product
+    )
+
+
+
+@app.route('/search/<query>')
+def search_results(query):
+    return render_template('search.html', query=query)
+
+
+# BONUS: handle form submission
+@app.route('/search', methods=['POST'])
+def search_form():
+    query = request.form.get('query')
+    return redirect(url_for('search_results', query=query))
+
 
 
 @app.route('/about/')  # Trailing slash means both /about and /about/ work

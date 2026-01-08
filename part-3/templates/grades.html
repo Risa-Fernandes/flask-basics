@@ -32,23 +32,23 @@
             font-weight: bold;
         }
         nav a:hover { color: #2b6cb0; }
-        .project-card {
+        .grade-card {
             border: 1px solid #e2e8f0;
             border-radius: 8px;
             padding: 20px;
             margin: 15px 0;
             transition: box-shadow 0.2s;
         }
-        .project-card:hover {
+        .grade-card:hover {
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
-        .project-name {
+        .grade-name {
             font-size: 20px;
             font-weight: bold;
             color: #2d3748;
             margin-bottom: 10px;
         }
-        .project-tech {
+        .grade-grade {
             color: #718096;
             font-size: 14px;
         }
@@ -106,70 +106,26 @@
             <a href="/grades">Grades</a>
         </nav>
 
-        <h1>My Projects</h1>
-        <p>This page shows how to loop through a <strong>list of dictionaries</strong> - a common pattern when displaying database data!</p>
-
-        <!-- Project cards using for loop with dictionaries -->
-        {% for project in projects %}
-        <div class="project-card">
-            <div class="project-name">{{ project.name }}</div>
-            <div class="project-tech">Tech: {{ project.tech }}</div>
-            <div style="margin-top: 10px;">
-                <!-- Conditional styling based on status -->
-                {% if project.status == 'Completed' %}
-                    <span class="status status-completed">{{ project.status }}</span>
-                {% elif project.status == 'In Progress' %}
-                    <span class="status status-in-progress">{{ project.status }}</span>
-                {% else %}
-                    <span class="status status-planned">{{ project.status }}</span>
-                {% endif %}
-            </div>
-        </div>
-        {% endfor %}
-
-        <h2>The Data Structure</h2>
-        <p>In <code>app.py</code>, we pass a list of dictionaries:</p>
-
-        <div class="code-example">
-projects= [<br>
-&nbsp;&nbsp;&nbsp;&nbsp;{'name': 'Personal Website', 'status': 'Completed', 'tech': 'HTML/CSS'},<br>
-&nbsp;&nbsp;&nbsp;&nbsp;{'name': 'Flask Blog', 'status': 'In Progress', 'tech': 'Python/Flask'},<br>
-&nbsp;&nbsp;&nbsp;&nbsp;{'name': 'Weather App', 'status': 'Planned', 'tech': 'JavaScript'},<br>
-]
-        </div>
-
-        <h2>Accessing Dictionary Values</h2>
-        <p>In Jinja2, you can access dictionary values with dot notation:</p>
-
-        <div class="code-example">
-{{ projects.name }}<br>
-{{ projects.status }}<br>
-{{ projects.tech }}
-        </div>
 
         <h2>As a Table</h2>
         <table>
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Project Name</th>
-                    <th>Technology</th>
-                    <th>Status</th>
+                    <th>Subject Name</th>
+                    <th>Grade</th>
                 </tr>
             </thead>
             <tbody>
-                {% for project in projects %}
+                {% for grade in grades %}
                 <tr>
                     <td>{{ loop.index }}</td>
-                    <td>{{ project.name }}</td>
-                    <td>{{ project.tech }}</td>
-                    <td>{{ project.status }}</td>
+                    <td>{{ grade.subject }}</td>
+                    <td>{{ grade.Grade }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
-
-        <p><strong>Total Projects:</strong> {{ projects|length }}</p>
     </div>
 </body>
 </html>

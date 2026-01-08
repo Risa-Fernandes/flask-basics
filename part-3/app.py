@@ -23,12 +23,18 @@ def profile():
     user_data = {
         'name': 'Sarah',
         'age': 22,
+        'email' : 'Sarah@gmail.com',
+        'city' : 'Pune',
+        'contact number' : '1234512345',
         'course': 'Web Development',
-        'is_enrolled': True
+        'is_enrolled': False
     }
     return render_template('profile.html',  # Pass multiple variables to template
                            name=user_data['name'],
                            age=user_data['age'],
+                           email=user_data['email'],
+                           city=user_data['city'],
+                           contact_number=user_data['contact number'],
                            course=user_data['course'],
                            is_enrolled=user_data['is_enrolled'])
 
@@ -41,12 +47,22 @@ def skills():
 
 @app.route('/projects')
 def projects():
-    project_list = [  # List of dictionaries - common pattern for database-like data
+    projects = [  # List of dictionaries - common pattern for database-like data
         {'name': 'Personal Website', 'status': 'Completed', 'tech': 'HTML/CSS'},
         {'name': 'Flask Blog', 'status': 'In Progress', 'tech': 'Python/Flask'},
         {'name': 'Weather App', 'status': 'Planned', 'tech': 'JavaScript'},
     ]
-    return render_template('projects.html', projects=project_list)
+    return render_template('projects.html', projects=projects)
+
+
+@app.route('/grades')
+def grades():
+    grades= [  # List of dictionaries - common pattern for database-like data
+        {'subject': 'Python', 'Grade': 'A'},
+        {'subject': 'Java', 'Grade': 'B'},
+        {'subject': 'C Programming', 'Grade': 'C'},
+    ]
+    return render_template('grades.html', grades=grades)
 
 
 if __name__ == '__main__':

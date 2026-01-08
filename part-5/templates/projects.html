@@ -23,7 +23,7 @@
         <!-- Tech tags using a nested loop -->
         <div class="tech-tags">
             {% for tech in project.tech %}
-                <span class="tech-tag">{{ tech }}</span>
+                <a href="{{ url_for('skill_projects', skill_name=tech) }}" class="tech-tag">{{ tech }}</a>
             {% endfor %}
         </div>
 

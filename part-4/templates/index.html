@@ -119,14 +119,66 @@
             <a href="/post/99">Post 99 (Not Found)</a>
         </div>
 
+
+        <!-- Product Demo -->
+        <div class="route-demo">
+            <h3>3. Product Route (Integer Parameter)</h3>
+            <p>Route: <code>/product/&lt;int:product_id&gt;</code></p>
+            <div class="code-block">
+                @app.route('/product/&lt;int:product_id&gt;')<br>
+                def show_product(product_id):<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;return render_template('product.html', product_id=product_id)
+            </div>
+            <p><strong>Try it:</strong></p>
+            <a href="/product/1">Product 1</a>
+            <a href="/product/2">Product 2</a>
+            <a href="/product/3">Product 3</a>
+            <a href="/product/99">Product 99 (Not Found)</a>
+        </div>
+
+
         <!-- Multiple Parameters Demo -->
         <div class="route-demo">
-            <h3>3. Multiple Parameters</h3>
+            <h3>4. Multiple Parameters</h3>
             <p>Route: <code>/user/&lt;username&gt;/post/&lt;int:post_id&gt;</code></p>
             <p><strong>Try it:</strong></p>
             <a href="/user/Alice/post/1">Alice's Post 1</a>
             <a href="/user/Bob/post/2">Bob's Post 2</a>
         </div>
+
+        <div class="route-demo">
+            <h3>5. Multiple Parameters</h3>
+            <p>Route: <code>/user/&lt;username&gt;/product/&lt;int:product_id&gt;</code></p>
+            <p><strong>Try it:</strong></p>
+            <a href="/user/Alice/product/1">Alice's Product 1</a>
+            <a href="/user/Bob/product/2">Bob's Product 2</a>
+        </div>
+
+        <div class="route-demo">
+            <h3>6. Category and Product Route</h3>
+            <p>Route: <code>/category/&lt;category_name&gt;/product/&lt;int:product_id&gt;</code></p>
+            <p><strong>Try it:</strong></p>
+            <a href="/category/furniture/product/1">Furniture - Product 1</a>
+            <a href="/category/furniture/product/2">Furniture - Product 2</a>
+            <a href="/category/electronics/product/3">Electronics - Product 3</a>
+        </div>
+
+
+        <div class="route-demo">
+            <h3>7. Search Route</h3>
+            <p>Route: <code>/search/&lt;query&gt;</code></p>
+
+            <form action="/search" method="POST">
+                <input type="text" name="query" placeholder="Search here..." required>
+                <button type="submit">Search</button>
+            </form>
+
+            <p><strong>Quick examples:</strong></p>
+            <a href="/search/flask">Search Flask</a>
+            <a href="/search/python">Search Python</a>
+        </div>
+
+
 
         <div class="try-it">
             <strong>Try Your Own!</strong>

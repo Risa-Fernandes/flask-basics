@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ category_name | title }} - Product {{ product_id }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f0f4f8;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        nav {
+            margin-bottom: 20px;
+            padding: 10px;
+            background: #edf2f7;
+            border-radius: 5px;
+        }
+        nav a {
+            margin-right: 15px;
+            text-decoration: none;
+            font-weight: bold;
+            color: #4a5568;
+        }
+        .badge {
+            background: #805ad5;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        .product-card {
+            border: 1px solid #e2e8f0;
+            padding: 25px;
+            border-radius: 10px;
+        }
+        .not-found {
+            background: #fed7d7;
+            border: 1px solid #fc8181;
+            color: #c53030;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <nav>
+        <a href="/">Home</a>
+        <a href="/about/">About</a>
+        <a href="/links">URL Builder</a>
+    </nav>
+
+    <span class="badge">
+        Category: {{ category_name | title }}
+    </span>
+
+    {% if product %}
+        <div class="product-card">
+            <h2>{{ product.name }}</h2>
+            <p><strong>Product ID:</strong> {{ product_id }}</p>
+            <p><strong>Price:</strong> ₹{{ product.price }}</p>
+        </div>
+    {% else %}
+        <div class="not-found">
+            <h2>Product Not Found</h2>
+            <p>Product #{{ product_id }} does not exist in this category.</p>
+        </div>
+    {% endif %}
+
+    <h3>Try More</h3>
+    <ul>
+        <li><a href="/category/furniture/product/1">Furniture → Table</a></li>
+        <li><a href="/category/furniture/product/2">Furniture → Chair</a></li>
+        <li><a href="/category/furniture/product/3">Furniture → Sofa</a></li>
+        <li><a href="/category/electronics/product/1">Electronics → Product 1</a></li>
+    </ul>
+
+</div>
+
+</body>
+</html>
