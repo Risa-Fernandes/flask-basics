@@ -23,7 +23,7 @@ PERSONAL_INFO = {
     'bio': 'A passionate developer learning Flask and web development.',
     'email': 'risarajivfernandes@gmail.com',
     'github': 'https://github.com/Risa-Fernandes',
-    'linkedin': 'https://linkedin.com/in/RisaFernandes',
+    'linkedin': 'https://linkedin.com/in/risa-fernandes-780145271',
 }
 
 SKILLS = [
